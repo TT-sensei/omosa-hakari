@@ -74,9 +74,9 @@ function setPointer(deg){$('pointer').style.transform=`rotate(${deg}deg)`}
 function answer(){if(!locked)return;
 const gText=$('answer').value.trim(), kgText=$('answerKg').value.trim();
 if(gText==='')return;
-const gValue=Number(gText), kgValue=Number(kgText);
+const gValue=Number(gText), kgValue=kgText===''?0:Number(kgText);
 if(!Number.isFinite(gValue))return;
-if(answerMode==='kg-g' && (kgText===''||!Number.isFinite(kgValue)||kgValue<0||gValue<0||gValue>999))return;
+if(answerMode==='kg-g' && (!Number.isFinite(kgValue)||kgValue<0||gValue<0||gValue>999))return;
 const value=answerMode==='kg-g' ? kgValue*1000+gValue : gValue;
 locked=false;$('answer').disabled=true;$('answerKg').disabled=true;$('answerBtn').disabled=true;
 const exact=value===target;recordWeight(target);const accepted=Math.abs(value-target)<=step;
