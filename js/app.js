@@ -23,8 +23,8 @@ function weightAngle(weight){return (weight/maxWeight)*360}
 function setPointer(deg){$('pointer').style.transform=`rotate(${deg}deg)`}
 function answer(){if(!locked)return;const value=Number($('answer').value);if(!Number.isFinite(value))return;locked=false;$('answer').disabled=true;$('answerBtn').disabled=true;
 const exact=value===target;const accepted=checker.check(value,target,{numeric:true,comparator:(a,b)=>Math.abs(Number(a)-Number(b))<=step,detail:{target,scale:maxWeight,step,exact}});
-if(accepted){if(exact){$('feedback').textContent='ぴったり！ '+target+'g';}else{$('feedback').textContent='おしい！ '+target+'g';} $('feedback').className='feedback correct';$('message').textContent='目盛をしっかり読めたね.';}
-else{$('feedback').textContent='正解は '+target+'g。針の先と目盛をもう一度見よう。';$('feedback').className='feedback wrong';$('message').textContent='正しい目盛はここだよ。';}
+if(accepted){if(exact){$('feedback').textContent='ぴったり！ '+target+'g';}else{$('feedback').textContent='おしい！ '+target+'g';} $('feedback').className='feedback correct';}
+else{$('feedback').textContent='正解は '+target+'g。針の先と目盛をもう一度見よう。';$('feedback').className='feedback wrong';}
 $('nextBtn').classList.remove('hidden')}
 $('nextBtn').addEventListener('click',spawn);
 
