@@ -45,7 +45,7 @@ button{cursor:pointer}
 .pointer span{position:absolute;top:-8px;left:50%;width:15px;height:15px;background:#c34b43;border-radius:50%;transform:translateX(-50%)}
 .dial-center{position:absolute;left:50%;top:50%;width:24px;height:24px;border-radius:50%;background:#52606b;border:4px solid #fff;transform:translate(-50%,-50%);z-index:5}
 .scale-base{position:absolute;left:8%;right:8%;bottom:-3px;height:16px;border-radius:50% 50% 5px 5px;background:#52606b;border:0}
-.message{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:30;background:#fff;border:2px solid var(--line);padding:8px 16px;border-radius:999px;font-weight:800;white-space:nowrap;opacity:0;transition:opacity .2s}.message.show{opacity:1}
+.question-message{margin:0 0 14px;padding:7px 10px;border-radius:10px;background:#f1f6fb;color:#52606b;text-align:center;font-size:.8rem;font-weight:800;line-height:1.4}
 
 .question{align-self:center;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px 18px;box-shadow:0 8px 22px rgba(24,42,67,.07)}
 .question-head{text-align:center}.question-kicker{display:inline-block;margin-bottom:4px;color:var(--green);font-size:.72rem;font-weight:900;letter-spacing:.06em}.question-label{font-size:1.18rem;font-weight:900;margin:0 0 15px}.question-label strong{font-size:1.35em}
@@ -66,7 +66,7 @@ button{cursor:pointer}
   .scale-choice{grid-template-columns:1fr;margin-top:22px}.scale-card{min-height:86px}.start-card{padding:26px 18px}.start-copy h1{font-size:2rem}
   
   .scale{width:96%;height:100%;min-height:350px}.pan{height:88px}.navian{width:72px;height:72px;top:37px}.scale-column{top:80px;height:78px}.scale-body{top:132px;height:calc(100% - 162px)}.dial{top:18px;width:220px}
-  .message{top:40px;font-size:.72rem;padding:6px 10px}.question{padding:8px}.answer-row{gap:5px}.answer-row input{width:100%;height:50px;font-size:1.4rem}.answer-row button{padding:8px 11px}.question-label{font-size:.95rem}.question-kicker{font-size:.62rem}
+  .question{padding:8px}.answer-row{gap:5px}.answer-row input{width:100%;height:50px;font-size:1.4rem}.answer-row button{padding:8px 11px}.question-label{font-size:.95rem}.question-kicker{font-size:.62rem}
 }
 @media(prefers-reduced-motion:reduce){.scale-card,.navian,.message{transition:none}.scale-card:hover,.scale-card:focus-visible{transform:none}}
 
