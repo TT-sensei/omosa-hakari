@@ -1,9 +1,16 @@
+import { AnswerChecker, EDU_EVENTS, emit } from 'https://tt-sensei.github.io/edu-components/index.js';
+
 const SCALES={1000:{name:'1kgのはかり',step:5},2000:{name:'2kgのはかり',step:10},4000:{name:'4kgのはかり',step:20}};
 const NAVIANS=Array.from({length:24},(_,i)=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/${['happa-squirrel-leafy','komorin-little-night-bat','purun-little-magic-slime','ember-frost-pup','sakura-snow-puff','star-bat','night-snow-puff','sunset-puru','mizutama-kappa','lantern-firefly','cloud-rain-rabbit','pebble-ram','rainbow-shell-snail','bubblefin-frog','ribbon-tailed-mouse','cobalt-blade-mantis','frostfang-weasel','thunderclaw-ram','skyfin-shark','lantern-eye-moth','pond-mirror-spirit','candy-coral-slug','mossy-porcupine','steam-sprocket-mole'][i]}.webp`);
 let maxWeight=1000,step=5,target=0,anim=null,locked=false;
 const $=id=>document.getElementById(id);
+const checker=new AnswerChecker({numeric:true,eventTarget:document});
+
 document.querySelectorAll('.scale-card').forEach(btn=>btn.addEventListener('click',()=>start(Number(btn.dataset.max))));
-$('titleBtn').addEventListener('click',showTitle);$('answerBtn').addEventListener('click',answer);$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')answer()});
+$('titleBtn').addEventListener('click',showTitle);
+$('answerBtn').addEventListener('click',answer);
+$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')answer()});
+
 function showTitle(){cancelAnimationFrame(anim);locked=false;$('app').classList.add('hidden');$('start').classList.remove('hidden')}
 function start(max){maxWeight=max;step=SCALES[max].step;$('scaleLabel').textContent=SCALES[max].name+'　1めもり '+step+'g';$('start').classList.add('hidden');$('app').classList.remove('hidden');buildDial();spawn()}
 function buildDial(){const svg=$('dialSvg');svg.innerHTML='';const NS='http://www.w3.org/2000/svg',cx=310,cy=310,r=255,intervals=maxWeight/step;
@@ -14,5 +21,9 @@ if(major&&i<intervals){const text=document.createElementNS(NS,'text');const tr=r
 function spawn(){cancelAnimationFrame(anim);locked=false;$('answer').value='';$('answer').disabled=true;$('answerBtn').disabled=true;$('nextBtn').classList.add('hidden');$('feedback').textContent='';$('feedback').className='feedback';$('message').textContent='ナビアンが はかりにのったよ。';$('message').className='message show';target=(Math.floor(Math.random()*(maxWeight/step-1))+1)*step;$('navian').src=NAVIANS[Math.floor(Math.random()*NAVIANS.length)];$('navian').className='navian entering';requestAnimationFrame(()=>$('navian').classList.add('on-pan'));const from=0,to=weightAngle(target),duration=900,t0=performance.now();function tick(t){const p=Math.min(1,(t-t0)/duration),e=1-Math.pow(1-p,3),deg=from+(to-from)*e;setPointer(deg);if(p<1)anim=requestAnimationFrame(tick);else{setPointer(to);locked=true;$('answer').disabled=false;$('answerBtn').disabled=false;$('message').textContent='針が止まったよ。目盛を読もう。';$('answer').focus()}}anim=requestAnimationFrame(tick)}
 function weightAngle(weight){return (weight/maxWeight)*360}
 function setPointer(deg){$('pointer').style.transform=`rotate(${deg}deg)`}
-function answer(){if(!locked)return;const value=Number($('answer').value);if(!Number.isFinite(value))return;locked=false;$('answer').disabled=true;$('answerBtn').disabled=true;const tolerance=step; if(Math.abs(value-target)<=tolerance){$('feedback').textContent=value===target?'ぴったり！ '+target+'g':'おしい！ '+target+'g';$('feedback').className='feedback correct';$('message').textContent='目盛をしっかり読めたね。'}else{$('feedback').textContent='正解は '+target+'g。針の先と目盛をもう一度見よう。';$('feedback').className='feedback wrong';$('message').textContent='正しい目盛はここだよ。'}$('nextBtn').classList.remove('hidden')}
+function answer(){if(!locked)return;const value=Number($('answer').value);if(!Number.isFinite(value))return;locked=false;$('answer').disabled=true;$('answerBtn').disabled=true;
+const exact=checker.check(value,target,{numeric:true,detail:{target,scale:maxWeight,step}});
+if(exact||Math.abs(value-target)<=step){if(exact){$('feedback').textContent='ぴったり！ '+target+'g';}else{$('feedback').textContent='おしい！ '+target+'g';} $('feedback').className='feedback correct';$('message').textContent='目盛をしっかり読めたね.';emit(document,EDU_EVENTS.CORRECT,{answer:value,target,exact,close:!exact,scale:maxWeight,step});}
+else{$('feedback').textContent='正解は '+target+'g。針の先と目盛をもう一度見よう。';$('feedback').className='feedback wrong';$('message').textContent='正しい目盛はここだよ。';emit(document,EDU_EVENTS.WRONG,{answer:value,target,scale:maxWeight,step})}
+$('nextBtn').classList.remove('hidden')}
 $('nextBtn').addEventListener('click',spawn);
