@@ -71,3 +71,6 @@ button{cursor:pointer}
 @media(prefers-reduced-motion:reduce){.scale-card,.navian,.message{transition:none}.scale-card:hover,.scale-card:focus-visible{transform:none}}
 
 .hint-btn{margin-top:10px;width:100%;min-height:44px;border:1px solid #cfd7e2;border-radius:12px;background:#f7f9fc;color:#344054;font-weight:700;cursor:pointer}.hint-btn:hover{background:#eef2f7}.hint{margin:8px 0 0;padding:10px 12px;border-radius:10px;background:#f1f6fb;color:#24344f;font-weight:700;text-align:center}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;padding:10px 8px;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted);text-align:center}.stats span{display:flex;flex-direction:column;gap:2px}.stats strong{font-size:1.05rem;color:var(--navy)}
+@media(max-width:820px){.stats{margin-top:6px;padding:6px 4px;font-size:.66rem}}
