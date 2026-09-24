@@ -21,7 +21,7 @@ function renderBook(){
   const grid=$('bookGrid'); if(!grid)return;
   grid.innerHTML=NAVIANS.map((src,i)=>{
     const r=records[String(i)];
-    return '<article class="book-card'+(r?' recorded':'')+'"><img src="'+src+'" alt="ナビアン '+(i+1)+'"><div class="book-card-body"><h3>ナビアン '+String(i+1).padStart(2,'0')+'</h3>'+
+    return '<article class="book-card'+(r?' recorded':'')+'"><img src="'+src+'" alt="'+NAVIAN_NAMES[i]+'"><div class="book-card-body"><h3>'+NAVIAN_NAMES[i]+'</h3>'+
       (r?'<div class="book-record"><span>測った回数 <strong>'+r.count+'</strong>回</span><span>最小 <strong>'+r.min+'</strong>g</span><span>最大 <strong>'+r.max+'</strong>g</span></div><p class="book-last">最近の記録　'+r.last+'g</p>':'<p class="book-unrecorded">まだ測っていないよ</p>')+
       '</div></article>';
   }).join('');
