@@ -33,6 +33,13 @@ $('bookBtn').addEventListener('click',openBook);
 $('backBtn').addEventListener('click',showTitle);
 $('bookClose').addEventListener('click',closeBook);
 $('answerBtn').addEventListener('click',answer);$('hintBtn').addEventListener('click',showHint);
+document.querySelectorAll('.keypad button').forEach(btn=>btn.addEventListener('click',()=>{
+  if($('answer').disabled)return;
+  const key=btn.dataset.key;
+  if(key==='clear')$('answer').value='';
+  else if(key==='back')$('answer').value=$('answer').value.slice(0,-1);
+  else if($('answer').value.length<5)$('answer').value+=key;
+}));
 $('answer').addEventListener('keydown',e=>{if(e.key==='Enter')answer()});
 
 function showTitle(){cancelAnimationFrame(anim);locked=false;$('book').classList.add('hidden');$('app').classList.add('hidden');$('start').classList.remove('hidden')}
