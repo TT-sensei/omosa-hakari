@@ -9,32 +9,69 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <div id="start">
+  <div class="start-orbit start-orbit-a"></div>
+  <div class="start-orbit start-orbit-b"></div>
   <img class="start-navi n1" src="https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/happa-squirrel-leafy.webp" alt="" aria-hidden="true">
   <img class="start-navi n2" src="https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/purun-little-magic-slime.webp" alt="" aria-hidden="true">
   <img class="start-navi n3" src="https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/sakura-snow-puff.webp" alt="" aria-hidden="true">
-  <img class="start-navi n4" src="https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/star-bat.webp" alt="" aria-hidden="true">
-  <img class="start-navi n5" src="https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/rainbow-shell-snail.webp" alt="" aria-hidden="true">
-  <main class="start-card">
-    <div class="start-copy">
-      <p class="eyebrow">さんすう・おもさ</p>
-      <h1>ナビアンの<br>おもさを はかろう</h1>
-      <p>はかりにのったナビアンを見て、何gか読んでみよう。</p>
-    </div>
-    <div class="scale-choice" aria-label="はかりを選ぶ">
-      <button class="scale-card" data-max="1000"><span class="scale-number">1kg</span><span>1めもり 5g</span></button>
-      <button class="scale-card" data-max="2000"><span class="scale-number">2kg</span><span>1めもり 10g</span></button>
-      <button class="scale-card" data-max="4000"><span class="scale-number">4kg</span><span>1めもり 20g</span></button>
-    </div>
-    <p class="start-note">はかりを選ぶと、ナビアンが上皿にのります。</p>
-    <button id="bookBtn" class="start-book-btn" type="button">ナビアン図鑑</button>
+
+  <main class="start-shell">
+    <header class="start-header">
+      <div class="brand-mark" aria-hidden="true">g</div>
+      <div>
+        <p class="start-eyebrow">さんすう・おもさ</p>
+        <h1>おもさを はかろう</h1>
+      </div>
+    </header>
+
+    <section class="start-hero">
+      <div class="start-copy">
+        <p class="start-lead">はかりの針と目盛をよく見て、<br><strong>ナビアンの重さ</strong>を読んでみよう。</p>
+        <div class="start-rule"><span></span><span></span><span></span></div>
+        <p class="start-sub">はかりを選んで、学習をはじめます。</p>
+      </div>
+
+      <div class="scale-choice" aria-label="はかりを選ぶ">
+        <button class="scale-card" data-max="1000">
+          <span class="scale-card-top"><span class="scale-number">1kg</span><span class="scale-arrow">→</span></span>
+          <span class="scale-card-step">1めもり <strong>5g</strong></span>
+          <span class="scale-card-desc">細かく読もう</span>
+        </button>
+        <button class="scale-card" data-max="2000">
+          <span class="scale-card-top"><span class="scale-number">2kg</span><span class="scale-arrow">→</span></span>
+          <span class="scale-card-step">1めもり <strong>10g</strong></span>
+          <span class="scale-card-desc">目盛を読み取ろう</span>
+        </button>
+        <button class="scale-card" data-max="4000">
+          <span class="scale-card-top"><span class="scale-number">4kg</span><span class="scale-arrow">→</span></span>
+          <span class="scale-card-step">1めもり <strong>20g</strong></span>
+          <span class="scale-card-desc">大きな重さを読もう</span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="start-footer">
+      <p>学習中は、針が止まってから目盛を読もう。</p>
+      <button id="bookBtn" class="start-book-btn" type="button"><span>図鑑</span> ナビアンの記録を見る</button>
+    </footer>
   </main>
 </div>
 
 <div id="app" class="hidden">
-  <button id="backBtn" class="back-btn" type="button">← はかりを選びなおす</button>
+  <header class="lesson-header">
+    <button id="backBtn" class="back-btn" type="button">← はかりを選びなおす</button>
+    <div class="lesson-title">
+      <span class="lesson-dot" aria-hidden="true"></span>
+      <div><p>さんすう・おもさ</p><strong>おもさを はかろう</strong></div>
+    </div>
+    <button id="lessonBookBtn" class="lesson-book-btn" type="button">図鑑</button>
+  </header>
+
   <main class="lesson">
     <section class="scale-area" aria-label="上皿はかり">
+      <div class="scale-label"><span>はかりを よく見よう</span><small>針が止まるまで待とう</small></div>
       <div class="measure-stage">
         <div class="scale">
           <div class="pan-shadow"></div>
@@ -56,10 +93,14 @@
     </section>
 
     <aside class="question" aria-label="答え">
+      <div class="question-top">
+        <span class="question-step">よんでみよう</span>
+        <span class="question-status">重さを読み取る</span>
+      </div>
       <p id="message" class="question-message" role="status">はかりが落ち着くまで見てみよう。</p>
       <div class="question-head">
-        <span class="question-kicker">よんでみよう</span>
         <p class="question-label">ナビアンは <strong>何g</strong>かな？</p>
+        <p class="question-hint-line">針の先が、どの目盛を指しているか見てみよう。</p>
       </div>
       <div class="answer-row">
         <input id="answer" type="number" inputmode="numeric" min="0" step="1" aria-label="重さ">
@@ -72,7 +113,8 @@
         <button type="button" data-key="7">7</button><button type="button" data-key="8">8</button><button type="button" data-key="9">9</button>
         <button type="button" data-key="clear" class="key-action">クリア</button><button type="button" data-key="0">0</button><button type="button" data-key="back" class="key-action">1字もどす</button>
       </div>
-      <button id="hintBtn" class="hint-btn" type="button">ヒントを見る</button><p id="hint" class="hint hidden" aria-live="polite"></p>
+      <button id="hintBtn" class="hint-btn" type="button">ヒントを見る</button>
+      <p id="hint" class="hint hidden" aria-live="polite"></p>
       <p id="feedback" class="feedback" aria-live="polite"></p>
       <button id="nextBtn" class="next hidden">つぎのナビアン →</button>
     </aside>
@@ -91,5 +133,8 @@
 </div>
 
 <script type="module" src="js/app.js"></script>
+<script>
+document.getElementById('lessonBookBtn').addEventListener('click',()=>document.getElementById('book').classList.remove('hidden'));
+</script>
 </body>
 </html>
