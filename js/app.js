@@ -1,5 +1,3 @@
-import { AnswerChecker } from 'https://tt-sensei.github.io/edu-components/index.js';
-
 const SCALES={1000:{name:'1kgのはかり',step:5},2000:{name:'2kgのはかり',step:10},4000:{name:'4kgのはかり',step:20}};
 const NAVIANS=Array.from({length:24},(_,i)=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/${['happa-squirrel-leafy','komorin-little-night-bat','purun-little-magic-slime','ember-frost-pup','sakura-snow-puff','star-bat','night-snow-puff','sunset-puru','mizutama-kappa','lantern-firefly','cloud-rain-rabbit','pebble-ram','rainbow-shell-snail','bubblefin-frog','ribbon-tailed-mouse','cobalt-blade-mantis','frostfang-weasel','thunderclaw-ram','skyfin-shark','lantern-eye-moth','pond-mirror-spirit','candy-coral-slug','mossy-porcupine','steam-sprocket-mole'][i]}.webp`);
 let maxWeight=1000,step=5,target=0,anim=null,locked=false,currentNavian=-1;
@@ -27,7 +25,6 @@ function renderBook(){
   }).join('');
 }
 const $=id=>document.getElementById(id);
-const checker=new AnswerChecker({numeric:true,eventTarget:document});
 
 document.querySelectorAll('.scale-card').forEach(btn=>btn.addEventListener('click',()=>start(Number(btn.dataset.max))));
 $('bookBtn').addEventListener('click',openBook);
@@ -48,7 +45,7 @@ function spawn(){cancelAnimationFrame(anim);locked=false;$('answer').value='';$(
 function weightAngle(weight){return (weight/maxWeight)*360}
 function setPointer(deg){$('pointer').style.transform=`rotate(${deg}deg)`}
 function answer(){if(!locked)return;const value=Number($('answer').value);if(!Number.isFinite(value))return;locked=false;$('answer').disabled=true;$('answerBtn').disabled=true;
-const exact=value===target;recordWeight(target);const accepted=checker.check(value,target,{numeric:true,comparator:(a,b)=>Math.abs(Number(a)-Number(b))<=step,detail:{target,scale:maxWeight,step,exact}});
+const exact=value===target;recordWeight(target);const accepted=Math.abs(value-target)<=step;
 if(accepted){if(exact){$('feedback').textContent='ぴったり！ '+target+'g';}else{$('feedback').textContent='おしい！ '+target+'g';} $('feedback').className='feedback correct';}
 else{$('feedback').textContent='正解は '+target+'g。針の先と目盛をもう一度見よう。';$('feedback').className='feedback wrong';}
 $('nextBtn').classList.remove('hidden')}
