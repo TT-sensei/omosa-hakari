@@ -22,17 +22,17 @@ button{cursor:pointer}
 .scale-number{font-size:2rem;font-weight:900;line-height:1}.scale-card span:last-child{color:var(--muted);font-size:.82rem}
 .start-note{text-align:left;max-width:760px;color:var(--muted);font-size:.75rem;margin:15px auto 0}
 
-#app{height:100%;width:100%;max-width:1380px;margin:auto;padding:10px 16px 12px;display:flex;flex-direction:column;gap:8px}
+#app{height:100%;width:100%;max-width:1500px;margin:auto;padding:10px 16px 12px;display:flex;flex-direction:column;gap:8px}
 .topbar{height:50px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none}.topbar h1{font-size:1.25rem;margin:0}.topbar p{font-size:.7rem;color:var(--muted);margin:2px 0 0}
 .head-btn{min-height:40px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-weight:800}.head-btn:hover,.head-btn:focus-visible{border-color:#9fb0bd}
 
-.lesson{min-height:0;flex:1;display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:12px}
+.lesson{min-height:0;flex:1;display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px}
 .scale-area{position:relative;min-width:0;min-height:0;display:grid;place-items:center;border-radius:22px;background:linear-gradient(#f9fbfc,#eaf0f3);overflow:hidden}
 .measure-stage{position:relative;width:100%;height:100%;display:grid;place-items:center}
 
 
 
-.scale{position:relative;width:min(86%,760px);height:min(88%,570px);min-height:390px}
+.scale{position:relative;width:min(88%,820px);height:min(90%,600px);min-height:420px}
 .pan-shadow{position:absolute;left:11%;right:11%;top:5%;height:22px;border-radius:50%;background:rgba(23,35,59,.12)}
 .pan{position:absolute;left:9%;right:9%;top:3%;height:104px;border-radius:0 0 48% 48% / 0 0 58% 58%;background:#d7dde2;border:3px solid #66737f;z-index:5;display:grid;place-items:center}
 .pan:after{content:"";position:absolute;left:7%;right:7%;top:15px;height:60px;border-radius:50%;background:#eef1f3;border:2px solid #7d8994}.pan-rim{position:absolute;inset:-4px -1px auto;height:18px;border-radius:50%;border:3px solid #66737f;background:#d7dde2;z-index:2}
