@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>ナビアンの おもさを はかろう</title>
 <link rel="stylesheet" href="https://tt-sensei.github.io/edu-effects/css/edu-effects.css">
 <link rel="stylesheet" href="https://tt-sensei.github.io/edu-effects/css/edu-feedback.css">
@@ -133,6 +133,15 @@
 </div>
 
 <script type="module" src="js/app.js"></script>
+<script>
+/* タブレットでのピンチズームによるレイアウト変化を防ぐ */
+(() => {
+  const stopGestureZoom = (event) => event.preventDefault();
+  ['gesturestart','gesturechange','gestureend'].forEach(type => {
+    document.addEventListener(type, stopGestureZoom, { passive: false });
+  });
+})();
+</script>
 <script>
 document.getElementById('lessonBookBtn').addEventListener('click',()=>document.getElementById('book').classList.remove('hidden'));
 </script>
