@@ -30,6 +30,7 @@ const $=id=>document.getElementById(id);
 
 document.querySelectorAll('.scale-card').forEach(btn=>btn.addEventListener('click',()=>start(Number(btn.dataset.max))));
 $('bookBtn').addEventListener('click',openBook);
+$('backBtn').addEventListener('click',showTitle);
 $('bookClose').addEventListener('click',closeBook);
 $('answerBtn').addEventListener('click',answer);$('hintBtn').addEventListener('click',showHint);
 $('answer').addEventListener('keydown',e=>{if(e.key==='Enter')answer()});
