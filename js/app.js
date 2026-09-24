@@ -15,8 +15,7 @@ function recordWeight(weight){
   r.last=weight;
   records[key]=r;
   saveRecords();
-  updateAnswerMode();
-renderBook();
+  renderBook();
 }
 function renderBook(){
   const grid=$('bookGrid'); if(!grid)return;
