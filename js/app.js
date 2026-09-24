@@ -1,5 +1,5 @@
 const SCALES={1000:{name:'1kgのはかり',step:5},2000:{name:'2kgのはかり',step:10},4000:{name:'4kgのはかり',step:20}};
-const NAVIANS=['https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/happa-squirrel-leafy.webp','https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/komorin-little-night-bat.webp','https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/purun-little-magic-slime.webp'];
+const NAVIANS=Array.from({length:24},(_,i)=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/${['happa-squirrel-leafy','komorin-little-night-bat','purun-little-magic-slime','ember-frost-pup','sakura-snow-puff','star-bat','night-snow-puff','sunset-puru','mizutama-kappa','lantern-firefly','cloud-rain-rabbit','pebble-ram','rainbow-shell-snail','bubblefin-frog','ribbon-tailed-mouse','cobalt-blade-mantis','frostfang-weasel','thunderclaw-ram','skyfin-shark','lantern-eye-moth','pond-mirror-spirit','candy-coral-slug','mossy-porcupine','steam-sprocket-mole'][i]}.webp`);
 let maxWeight=1000,step=5,target=0,anim=null,locked=false;
 const $=id=>document.getElementById(id);
 document.querySelectorAll('.scale-card').forEach(btn=>btn.addEventListener('click',()=>start(Number(btn.dataset.max))));
