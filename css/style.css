@@ -6,14 +6,14 @@ button{cursor:pointer}
 .hidden{display:none!important}
 
 #start{position:fixed;inset:0;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#e9f2f7,#f6f4ed)}
-.start-card{width:min(880px,100%);padding:38px 42px;border:1px solid var(--line);border-radius:26px;background:rgba(255,255,255,.97);box-shadow:0 18px 48px rgba(24,42,67,.11)}
-.start-copy{text-align:center}.eyebrow{margin:0 0 7px;color:var(--green);font-weight:800;font-size:.82rem}
-.start-copy h1{margin:0;font-size:clamp(2rem,5vw,3.6rem);line-height:1.2}.start-copy p:last-child{margin:11px 0 0;color:var(--muted)}
-.scale-choice{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:30px}
-.scale-card{min-height:132px;border:2px solid var(--line);border-radius:18px;background:#fff;color:var(--navy);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;transition:border-color .15s,background .15s,transform .15s;box-shadow:0 4px 12px rgba(24,42,67,.05)}
+.start-card{width:min(980px,100%);padding:34px 40px;border:1px solid var(--line);border-radius:26px;background:rgba(255,255,255,.98);box-shadow:0 18px 48px rgba(24,42,67,.11)}
+.start-copy{text-align:left;max-width:760px;margin:0 auto}.eyebrow{margin:0 0 8px;color:var(--green);font-weight:800;font-size:.8rem}
+.start-copy h1{margin:0;font-size:clamp(2.1rem,5vw,3.5rem);line-height:1.16;letter-spacing:-.02em}.start-copy p:last-child{margin:12px 0 0;color:var(--muted);font-size:.92rem}
+.scale-choice{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.scale-card{min-height:118px;border:1px solid #d5dfe5;border-radius:16px;background:#f9fbfc;color:var(--navy);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:20px 22px;gap:5px;text-align:left;transition:border-color .15s,background .15s,transform .15s;box-shadow:none}
 .scale-card:hover,.scale-card:focus-visible{border-color:#8acdb8;background:#f7fffc;transform:translateY(-2px)}.scale-card:active{transform:none}
-.scale-number{font-size:2rem;font-weight:900}.scale-card span:last-child{color:var(--muted);font-size:.9rem}
-.start-note{text-align:center;color:var(--muted);font-size:.78rem;margin:19px 0 0}
+.scale-number{font-size:2rem;font-weight:900;line-height:1}.scale-card span:last-child{color:var(--muted);font-size:.82rem}
+.start-note{text-align:left;max-width:760px;color:var(--muted);font-size:.75rem;margin:15px auto 0}
 
 #app{height:100%;width:100%;max-width:1380px;margin:auto;padding:10px 16px 12px;display:flex;flex-direction:column;gap:8px}
 .topbar{height:50px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none}.topbar h1{font-size:1.25rem;margin:0}.topbar p{font-size:.7rem;color:var(--muted);margin:2px 0 0}
@@ -22,9 +22,9 @@ button{cursor:pointer}
 .lesson{min-height:0;flex:1;display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:12px}
 .scale-area{position:relative;min-width:0;min-height:0;display:grid;place-items:center;border-radius:22px;background:linear-gradient(#f9fbfc,#eaf0f3);overflow:hidden}
 .measure-stage{position:relative;width:100%;height:100%;display:grid;place-items:center}
-.stage-caption{position:absolute;top:13px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;z-index:25;white-space:nowrap;color:#536273;font-size:.72rem;font-weight:800}
-.stage-step{padding:5px 9px;border:1px solid #d9e2e8;border-radius:999px;background:rgba(255,255,255,.9)}
-.stage-arrow{color:#8a98a6}
+
+
+
 .scale{position:relative;width:min(86%,760px);height:min(88%,570px);min-height:390px}
 .pan-shadow{position:absolute;left:10%;right:10%;top:4%;height:40px;border-radius:50%;background:rgba(20,35,59,.13);filter:blur(8px)}
 .pan{position:absolute;left:8%;right:8%;top:2%;height:112px;border-radius:0 0 48% 48% / 0 0 60% 60%;background:linear-gradient(#fff,#e2e8ed);border:4px solid #9aa7b4;box-shadow:0 8px 15px rgba(24,42,67,.15);z-index:5;display:grid;place-items:center}
@@ -38,7 +38,7 @@ button{cursor:pointer}
 .pointer span{position:absolute;top:-8px;left:50%;width:15px;height:15px;background:#c34b43;border-radius:50%;transform:translateX(-50%)}
 .dial-center{position:absolute;left:50%;top:50%;width:28px;height:28px;border-radius:50%;background:#65727d;border:5px solid #e9edf0;transform:translate(-50%,-50%);z-index:5}
 .scale-base{position:absolute;left:3%;right:3%;bottom:-3px;height:40px;border-radius:50% 50% 10px 10px;background:#b6c0c8;border:3px solid #818d98}
-.message{position:absolute;top:54px;left:50%;transform:translateX(-50%);z-index:30;background:#fff;border:2px solid var(--line);padding:8px 16px;border-radius:999px;font-weight:800;white-space:nowrap;opacity:0;transition:opacity .2s}.message.show{opacity:1}
+.message{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:30;background:#fff;border:2px solid var(--line);padding:8px 16px;border-radius:999px;font-weight:800;white-space:nowrap;opacity:0;transition:opacity .2s}.message.show{opacity:1}
 
 .question{align-self:center;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:20px 18px;box-shadow:0 8px 22px rgba(24,42,67,.07)}
 .question-head{text-align:center}.question-kicker{display:inline-block;margin-bottom:4px;color:var(--green);font-size:.72rem;font-weight:900;letter-spacing:.06em}.question-label{font-size:1.18rem;font-weight:900;margin:0 0 15px}.question-label strong{font-size:1.35em}
@@ -55,7 +55,7 @@ button{cursor:pointer}
 @media(max-width:650px){
   #app{padding:7px 9px}.topbar{height:42px}.topbar h1{font-size:1rem}.topbar p{display:none}.head-btn{min-height:36px;padding:6px 10px;font-size:.7rem}
   .scale-choice{grid-template-columns:1fr;margin-top:22px}.scale-card{min-height:86px}.start-card{padding:26px 18px}.start-copy h1{font-size:2rem}
-  .stage-caption{top:7px;gap:4px;font-size:.58rem}.stage-step{padding:4px 6px}.stage-arrow{display:none}
+  
   .scale{width:96%;height:100%;min-height:350px}.pan{height:88px}.navian{width:72px;height:72px;top:37px}.scale-column{top:80px;height:78px}.scale-body{height:255px}.dial{top:18px;width:220px}
   .message{top:40px;font-size:.72rem;padding:6px 10px}.question{padding:8px}.answer-row{gap:5px}.answer-row input{width:100%;height:50px;font-size:1.4rem}.answer-row button{padding:8px 11px}.question-label{font-size:.95rem}.question-kicker{font-size:.62rem}
 }
