@@ -37,8 +37,8 @@ button{cursor:pointer}
 .pan{position:absolute;left:9%;right:9%;top:3%;height:92px;background:transparent;border:0;z-index:5;display:grid;place-items:center}
 .pan:after{content:"";position:absolute;left:4%;right:4%;bottom:10px;height:4px;border-radius:999px;background:#66737f}.pan-rim{display:none}
 .navian{position:absolute;z-index:8;left:50%;top:43px;width:94px;height:94px;object-fit:contain;transform:translate(-50%,-55%) scale(.82);filter:drop-shadow(0 7px 5px rgba(0,0,0,.22));opacity:0;transition:opacity .25s,transform .35s}.navian.on-pan{opacity:1;transform:translate(-50%,-55%) scale(1)}
-.scale-column{position:absolute;left:50%;top:86px;width:24px;height:70px;transform:translateX(-50%);background:#6f7b86;border:0;z-index:2}
-.scale-body{position:absolute;left:15%;right:15%;top:140px;height:calc(100% - 175px);border-radius:14px 14px 8px 8px;background:#68747f;border:0;box-shadow:none;z-index:1}
+.scale-column{position:absolute;left:50%;top:86px;width:24px;height:70px;transform:translateX(-50%);background:#6f7b86;border:0;z-index:0}
+.scale-body{position:absolute;left:15%;right:15%;top:140px;height:calc(100% - 175px);border-radius:14px 14px 8px 8px;background:#68747f;border:0;box-shadow:none;z-index:2}
 .dial{position:absolute;left:50%;top:24px;width:min(72%,315px);aspect-ratio:1/1;transform:translateX(-50%);border-radius:50%;background:#fff;border:4px solid #52606b;overflow:hidden}
 #dialSvg{position:absolute;inset:0;width:100%;height:100%}
 .pointer{position:absolute;left:calc(50% - 1.5px);bottom:50%;width:3px;height:45%;background:#c34b43;border-radius:5px;transform-origin:50% 100%;z-index:4;box-shadow:none;transform:rotate(0deg)}
