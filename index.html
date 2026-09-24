@@ -73,21 +73,10 @@
         <button id="answerBtn">答える</button>
       </div>
       <button id="hintBtn" class="hint-btn" type="button">ヒントを見る</button><p id="hint" class="hint hidden" aria-live="polite"></p>
-      <p id="feedback" class="feedback" aria-live="polite"></p>
+      <div class="stats" aria-label="これまでの記録"><span>測った回数 <strong id="count">0</strong>回</span><span>最小 <strong id="min">—</strong>g</span><span>最大 <strong id="max">—</strong>g</span></div><p id="feedback" class="feedback" aria-live="polite"></p>
       <button id="nextBtn" class="next hidden">つぎのナビアン →</button>
     </aside>
   </main>
-</div>
-
-<div id="book" class="hidden" aria-label="ナビアン図鑑">
-  <div class="book-panel">
-    <header class="book-header">
-      <div><p class="book-kicker">ナビアンの記録</p><h2>ナビアン図鑑</h2></div>
-      <button id="bookClose" class="head-btn">もどる</button>
-    </header>
-    <p class="book-intro">測ったナビアンの重さが記録されます。同じナビアンを何度も測ると、記録が増えていくよ。</p>
-    <div id="bookGrid" class="book-grid"></div>
-  </div>
 </div>
 <script type="module" src="js/app.js"></script>
 </body>
