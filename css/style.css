@@ -6,12 +6,12 @@ button{cursor:pointer}
 .hidden{display:none!important}
 
 #start{position:fixed;inset:0;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#e9f2f7,#f6f4ed);overflow:hidden}
-.start-navi{position:absolute;width:72px;height:72px;object-fit:contain;filter:drop-shadow(0 7px 5px rgba(23,35,59,.12));z-index:2;pointer-events:none}
-.start-navi.n1{left:calc(50% - 500px);top:14%;transform:rotate(-10deg)}
-.start-navi.n2{left:calc(50% + 420px);top:18%;width:66px;height:66px;transform:rotate(9deg)}
-.start-navi.n3{left:calc(50% - 455px);bottom:17%;width:64px;height:64px;transform:rotate(8deg)}
-.start-navi.n4{left:calc(50% + 450px);bottom:16%;width:70px;height:70px;transform:rotate(-12deg)}
-.start-navi.n5{left:calc(50% + 335px);bottom:7%;width:58px;height:58px;transform:rotate(7deg)}
+#start > .start-navi{position:absolute!important;width:72px!important;height:72px!important;max-width:72px!important;max-height:72px!important;object-fit:contain;filter:drop-shadow(0 7px 5px rgba(23,35,59,.12));z-index:2;pointer-events:none}
+#start > .start-navi.n1{left:calc(50% - 500px);top:14%;transform:rotate(-10deg)}
+#start > #start > .start-navi.n2{left:calc(50% + 420px);top:18%;width:66px!important;height:66px!important;max-width:66px!important;max-height:66px!important;transform:rotate(9deg)}
+#start > #start > .start-navi.n3{left:calc(50% - 455px);bottom:17%;width:64px!important;height:64px!important;max-width:64px!important;max-height:64px!important;transform:rotate(8deg)}
+#start > #start > .start-navi.n4{left:calc(50% + 450px);bottom:16%;width:70px!important;height:70px!important;max-width:70px!important;max-height:70px!important;transform:rotate(-12deg)}
+#start > #start > .start-navi.n5{left:calc(50% + 335px);bottom:7%;width:58px!important;height:58px!important;max-width:58px!important;max-height:58px!important;transform:rotate(7deg)}
 
 .start-card{width:min(980px,100%);padding:34px 40px;border:1px solid var(--line);border-radius:26px;background:rgba(255,255,255,.98);box-shadow:0 18px 48px rgba(24,42,67,.11)}
 .start-copy{text-align:left;max-width:760px;margin:0 auto}.eyebrow{margin:0 0 8px;color:var(--green);font-weight:800;font-size:.8rem}
