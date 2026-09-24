@@ -1,4 +1,4 @@
-import { AnswerChecker, EDU_EVENTS, emit } from 'https://tt-sensei.github.io/edu-components/index.js';
+import { AnswerChecker } from 'https://tt-sensei.github.io/edu-components/index.js';
 
 const SCALES={1000:{name:'1kgのはかり',step:5},2000:{name:'2kgのはかり',step:10},4000:{name:'4kgのはかり',step:20}};
 const NAVIANS=Array.from({length:24},(_,i)=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/${['happa-squirrel-leafy','komorin-little-night-bat','purun-little-magic-slime','ember-frost-pup','sakura-snow-puff','star-bat','night-snow-puff','sunset-puru','mizutama-kappa','lantern-firefly','cloud-rain-rabbit','pebble-ram','rainbow-shell-snail','bubblefin-frog','ribbon-tailed-mouse','cobalt-blade-mantis','frostfang-weasel','thunderclaw-ram','skyfin-shark','lantern-eye-moth','pond-mirror-spirit','candy-coral-slug','mossy-porcupine','steam-sprocket-mole'][i]}.webp`);
@@ -22,8 +22,8 @@ function spawn(){cancelAnimationFrame(anim);locked=false;$('answer').value='';$(
 function weightAngle(weight){return (weight/maxWeight)*360}
 function setPointer(deg){$('pointer').style.transform=`rotate(${deg}deg)`}
 function answer(){if(!locked)return;const value=Number($('answer').value);if(!Number.isFinite(value))return;locked=false;$('answer').disabled=true;$('answerBtn').disabled=true;
-const exact=checker.check(value,target,{numeric:true,detail:{target,scale:maxWeight,step}});
-if(exact||Math.abs(value-target)<=step){if(exact){$('feedback').textContent='ぴったり！ '+target+'g';}else{$('feedback').textContent='おしい！ '+target+'g';} $('feedback').className='feedback correct';$('message').textContent='目盛をしっかり読めたね.';emit(document,EDU_EVENTS.CORRECT,{answer:value,target,exact,close:!exact,scale:maxWeight,step});}
-else{$('feedback').textContent='正解は '+target+'g。針の先と目盛をもう一度見よう。';$('feedback').className='feedback wrong';$('message').textContent='正しい目盛はここだよ。';emit(document,EDU_EVENTS.WRONG,{answer:value,target,scale:maxWeight,step})}
+const exact=value===target;const accepted=checker.check(value,target,{numeric:true,comparator:(a,b)=>Math.abs(Number(a)-Number(b))<=step,detail:{target,scale:maxWeight,step,exact}});
+if(accepted){if(exact){$('feedback').textContent='ぴったり！ '+target+'g';}else{$('feedback').textContent='おしい！ '+target+'g';} $('feedback').className='feedback correct';$('message').textContent='目盛をしっかり読めたね.';}
+else{$('feedback').textContent='正解は '+target+'g。針の先と目盛をもう一度見よう。';$('feedback').className='feedback wrong';$('message').textContent='正しい目盛はここだよ。';}
 $('nextBtn').classList.remove('hidden')}
 $('nextBtn').addEventListener('click',spawn);
