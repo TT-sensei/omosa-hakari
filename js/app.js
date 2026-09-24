@@ -3,6 +3,10 @@ import { AnswerChecker } from 'https://tt-sensei.github.io/edu-components/index.
 const SCALES={1000:{name:'1kgのはかり',step:5},2000:{name:'2kgのはかり',step:10},4000:{name:'4kgのはかり',step:20}};
 const NAVIANS=Array.from({length:24},(_,i)=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/${['happa-squirrel-leafy','komorin-little-night-bat','purun-little-magic-slime','ember-frost-pup','sakura-snow-puff','star-bat','night-snow-puff','sunset-puru','mizutama-kappa','lantern-firefly','cloud-rain-rabbit','pebble-ram','rainbow-shell-snail','bubblefin-frog','ribbon-tailed-mouse','cobalt-blade-mantis','frostfang-weasel','thunderclaw-ram','skyfin-shark','lantern-eye-moth','pond-mirror-spirit','candy-coral-slug','mossy-porcupine','steam-sprocket-mole'][i]}.webp`);
 let maxWeight=1000,step=5,target=0,anim=null,locked=false;
+const STATS_KEY='omosa-hakari-stats-v1';
+let stats=JSON.parse(localStorage.getItem(STATS_KEY)||'{"count":0,"min":null,"max":null}');
+function renderStats(){ $('count').textContent=stats.count; $('min').textContent=stats.min??'—'; $('max').textContent=stats.max??'—'; }
+function recordWeight(weight){stats.count++;stats.min=stats.min===null?weight:Math.min(stats.min,weight);stats.max=stats.max===null?weight:Math.max(stats.max,weight);localStorage.setItem(STATS_KEY,JSON.stringify(stats));renderStats();}
 const $=id=>document.getElementById(id);
 const checker=new AnswerChecker({numeric:true,eventTarget:document});
 
@@ -12,7 +16,7 @@ $('answerBtn').addEventListener('click',answer);$('hintBtn').addEventListener('c
 $('answer').addEventListener('keydown',e=>{if(e.key==='Enter')answer()});
 
 function showTitle(){cancelAnimationFrame(anim);locked=false;$('app').classList.add('hidden');$('start').classList.remove('hidden')}
-function start(max){maxWeight=max;step=SCALES[max].step;$('scaleLabel').textContent=SCALES[max].name+'　1めもり '+step+'g';$('start').classList.add('hidden');$('app').classList.remove('hidden');buildDial();spawn()}
+function start(max){maxWeight=max;step=SCALES[max].step;renderStats();$('scaleLabel').textContent=SCALES[max].name+'　1めもり '+step+'g';$('start').classList.add('hidden');$('app').classList.remove('hidden');buildDial();spawn()}
 function buildDial(){const svg=$('dialSvg');svg.innerHTML='';const NS='http://www.w3.org/2000/svg',cx=310,cy=310,r=255,intervals=maxWeight/step;
 const circle=document.createElementNS(NS,'circle');circle.setAttribute('cx',cx);circle.setAttribute('cy',cy);circle.setAttribute('r',r);circle.setAttribute('fill','none');circle.setAttribute('stroke','#cbd3dc');circle.setAttribute('stroke-width','3');svg.appendChild(circle);
 for(let i=0;i<=intervals;i++){const a=-Math.PI/2+(i/intervals)*Math.PI*2,major=i%20===0,mid=i%10===0,inner=r-(major?30:mid?22:14),x1=cx+Math.cos(a)*inner,y1=cy+Math.sin(a)*inner,x2=cx+Math.cos(a)*r,y2=cy+Math.sin(a)*r;
@@ -22,7 +26,7 @@ function spawn(){cancelAnimationFrame(anim);locked=false;$('answer').value='';$(
 function weightAngle(weight){return (weight/maxWeight)*360}
 function setPointer(deg){$('pointer').style.transform=`rotate(${deg}deg)`}
 function answer(){if(!locked)return;const value=Number($('answer').value);if(!Number.isFinite(value))return;locked=false;$('answer').disabled=true;$('answerBtn').disabled=true;
-const exact=value===target;const accepted=checker.check(value,target,{numeric:true,comparator:(a,b)=>Math.abs(Number(a)-Number(b))<=step,detail:{target,scale:maxWeight,step,exact}});
+const exact=value===target;recordWeight(target);const accepted=checker.check(value,target,{numeric:true,comparator:(a,b)=>Math.abs(Number(a)-Number(b))<=step,detail:{target,scale:maxWeight,step,exact}});
 if(accepted){if(exact){$('feedback').textContent='ぴったり！ '+target+'g';}else{$('feedback').textContent='おしい！ '+target+'g';} $('feedback').className='feedback correct';}
 else{$('feedback').textContent='正解は '+target+'g。針の先と目盛をもう一度見よう。';$('feedback').className='feedback wrong';}
 $('nextBtn').classList.remove('hidden')}
