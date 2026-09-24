@@ -33,6 +33,12 @@
         <p class="start-sub">はかりを選んで、学習をはじめます。</p>
       </div>
 
+      <div class="answer-mode" aria-label="答え方を選ぶ">
+        <button class="answer-mode-card active" data-mode="g"><span class="answer-mode-title">g で答える</span><span class="answer-mode-desc">重さを g で読もう</span></button>
+        <button class="answer-mode-card" data-mode="kg-g"><span class="answer-mode-title">kg・g で答える</span><span class="answer-mode-desc">kg と g に分けて読もう</span></button>
+      </div>
+
+      <p class="choice-label">はかりを えらぼう</p>
       <div class="scale-choice" aria-label="はかりを選ぶ">
         <button class="scale-card" data-max="1000">
           <span class="scale-card-top"><span class="scale-number">1kg</span><span class="scale-arrow">→</span></span>
@@ -99,12 +105,14 @@
       </div>
       <p id="message" class="question-message" role="status">はかりが落ち着くまで見てみよう。</p>
       <div class="question-head">
-        <p class="question-label">ナビアンは <strong>何g</strong>かな？</p>
+        <p id="questionLabel" class="question-label">ナビアンは <strong>何g</strong>かな？</p>
         <p class="question-hint-line">針の先が、どの目盛を指しているか見てみよう。</p>
       </div>
       <div class="answer-row">
+        <input id="answerKg" type="number" inputmode="numeric" min="0" step="1" aria-label="kg" class="kg-input hidden">
+        <span id="answerKgUnit" class="kg-unit hidden">kg</span>
         <input id="answer" type="number" inputmode="numeric" min="0" step="1" aria-label="重さ">
-        <span>g</span>
+        <span id="answerGUnit">g</span>
         <button id="answerBtn">答える</button>
       </div>
       <div class="keypad" aria-label="数字パッド">
