@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>ナビアン図鑑 - ANGLE HUNTER</title>
+<style>
+:root{--bg:#eef3f7;--navy:#17233b;--muted:#667085;--line:#d9e1ea;--gold:#e3a400}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--navy);font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif}
+body{overflow:auto}.book-shell{width:min(1120px,100%);margin:auto;padding:18px}
+.book-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.book-head h1{margin:0;font-size:clamp(1.4rem,4vw,2rem)}.book-head p{margin:4px 0 0;color:var(--muted);font-size:.78rem}.book-head p b{color:var(--navy)}
+.head-btn{min-height:44px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-weight:800;cursor:pointer}
+.book-group-title{display:flex;align-items:baseline;justify-content:space-between;margin:22px 0 10px;font-size:1.05rem}.book-group-title:first-child{margin-top:0}.book-group-title small{color:var(--muted);font-size:.72rem;font-weight:800}
+.book-group-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.book-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:8px;text-align:center;box-shadow:0 3px 10px rgba(24,42,67,.06);transition:transform .16s ease,box-shadow .16s ease}.book-card:active{transform:scale(.97)}
+.book-card img{display:block;width:100%;height:125px;object-fit:contain}.book-card span{display:block;font-size:.72rem;font-weight:800;line-height:1.35}.book-card small{display:block;margin-top:4px;color:var(--muted);font-size:.62rem;font-weight:800}
+.book-card.locked img{filter:brightness(0);opacity:.82}.book-card.locked span{color:#7b8492}
+.book-card.milestone-10{border-color:#9fb7d8;box-shadow:0 0 0 2px rgba(94,134,190,.12),0 6px 18px rgba(94,134,190,.16);animation:navianGlow10 2.4s ease-in-out infinite}
+.book-card.milestone-20{border-color:#d3a83a;box-shadow:0 0 0 2px rgba(211,168,58,.16),0 7px 22px rgba(211,168,58,.2);animation:navianGlow20 2.2s ease-in-out infinite}
+.book-card.milestone-30{border-color:#c58bdf;box-shadow:0 0 0 2px rgba(197,139,223,.18),0 8px 25px rgba(197,139,223,.24);animation:navianGlow30 2s ease-in-out infinite}
+.book-card.milestone-40{border-color:#65b9a7;box-shadow:0 0 0 2px rgba(101,185,167,.2),0 9px 28px rgba(101,185,167,.26);animation:navianGlow40 1.8s ease-in-out infinite}
+.book-card.milestone-50{border-color:#e58b62;box-shadow:0 0 0 2px rgba(229,139,98,.2),0 10px 30px rgba(229,139,98,.3);animation:navianGlow50 1.6s ease-in-out infinite}
+.book-card.milestone-60{border-color:#e3a400;box-shadow:0 0 0 3px rgba(227,164,0,.22),0 11px 34px rgba(227,164,0,.34);animation:navianGlow60 1.45s ease-in-out infinite}
+@keyframes navianGlow10{50%{transform:translateY(-1px);box-shadow:0 0 0 3px rgba(94,134,190,.2),0 8px 22px rgba(94,134,190,.22)}}
+@keyframes navianGlow20{50%{transform:translateY(-1px);box-shadow:0 0 0 3px rgba(211,168,58,.24),0 9px 26px rgba(211,168,58,.28)}}
+@keyframes navianGlow30{50%{transform:translateY(-1px);box-shadow:0 0 0 3px rgba(197,139,223,.26),0 10px 29px rgba(197,139,223,.32)}}
+@keyframes navianGlow40{50%{transform:translateY(-1px);box-shadow:0 0 0 3px rgba(101,185,167,.28),0 11px 32px rgba(101,185,167,.34)}}
+@keyframes navianGlow50{50%{transform:translateY(-1px);box-shadow:0 0 0 3px rgba(229,139,98,.3),0 12px 34px rgba(229,139,98,.38)}}
+@keyframes navianGlow60{50%{transform:translateY(-2px);box-shadow:0 0 0 4px rgba(227,164,0,.32),0 14px 38px rgba(227,164,0,.44)}}
+@media(max-width:900px){.book-group-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){.book-shell{padding:14px}.book-group-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.book-card{padding:7px;border-radius:13px}.book-card img{height:105px}.book-card span{font-size:.64rem}}
+</style>
+</head>
+<body>
+<main class="book-shell">
+<header class="book-head"><div><h1>ナビアン図鑑</h1><p>発見したモンスター <b id="bookProgress">0 / 0 種</b></p></div><button class="head-btn" id="bookBack">タイトルへ</button></header>
+<section id="bookGrid" aria-label="ナビアン図鑑"></section>
+</main>
+<script src="js/monsters.js"></script>
+<script>
+let gets2={};try{gets2=JSON.parse(localStorage.getItem('angleHunter.navianGets.v2')||'{}')||{}}catch(e){}const grid=document.getElementById('bookGrid');
+let discovered=0;
+for(const level of [1,2,3]){
+ const levelMonsters=MONSTERS.filter(m=>m.level===level);const title=document.createElement('h2');title.className='book-group-title';title.innerHTML=`<span>${level===1?'レベル1　ナビアン':level===2?'レベル2　エボナビ':'レベル3　ボスナビ'}</span><small>${levelMonsters.filter(m=>Number(gets2[m.id]||0)>0).length} / ${levelMonsters.length}</small>`;grid.appendChild(title);
+ const wrap=document.createElement('div');wrap.className='book-group-grid';
+ levelMonsters.forEach(m=>{
+    const count=Number(gets2[m.id]||0);
+   if(count) discovered++;
+   const card=document.createElement('article');card.className='book-card'+(count?'':' locked');
+   if(count>=60) card.classList.add('milestone-60');
+   else if(count>=50) card.classList.add('milestone-50');
+   else if(count>=40) card.classList.add('milestone-40');
+   else if(count>=30) card.classList.add('milestone-30');
+   else if(count>=20) card.classList.add('milestone-20');
+   else if(count>=10) card.classList.add('milestone-10');
+   const img=document.createElement('img');img.src=MONSTER_BASE+m.path+'/'+m.file;img.alt=count?m.name:'未発見のモンスター';img.loading='lazy';
+   const name=document.createElement('span');name.textContent=count?m.name:'？？？';
+   const small=document.createElement('small');small.textContent=count?'ゲット × '+count:'未発見';
+   card.append(img,name,small);wrap.appendChild(card);
+ });
+ grid.appendChild(wrap);
+}
+document.getElementById('bookProgress').textContent=discovered+' / '+MONSTERS.length+' 種';
+document.getElementById('bookBack').onclick=()=>location.href='./';
+</script>
+</body></html>
