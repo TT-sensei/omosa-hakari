@@ -4,7 +4,15 @@ const NAVIAN_NAMES=["はっぱリス","こもりんナイトバット","ぷる�
 const NAVIANS=NAVIAN_IDS.map(id=>`https://raw.githubusercontent.com/TT-sensei/navi-character-/main/assets/web/fantasy/monsters/zako/${id}.webp`);
 let maxWeight=1000,step=5,target=0,anim=null,locked=false,currentNavian=-1,answerMode='g',activeInput='answer';
 const RECORDS_KEY='omosa-hakari-navian-records-v1';
-let records=JSON.parse(localStorage.getItem(RECORDS_KEY)||'{}');
+function loadRecords(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(RECORDS_KEY)||'{}');
+    return saved&&typeof saved==='object'&&!Array.isArray(saved)?saved:{};
+  }catch{
+    return {};
+  }
+}
+let records=loadRecords();
 function saveRecords(){localStorage.setItem(RECORDS_KEY,JSON.stringify(records));}
 function recordWeight(weight){
   const key=String(currentNavian);
